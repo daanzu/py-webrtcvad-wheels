@@ -1,11 +1,21 @@
-import pkg_resources
+import sys
 
 import _webrtcvad
 
 __author__ = "John Wiseman jjwiseman@gmail.com"
 __copyright__ = "Copyright (C) 2016 John Wiseman"
 __license__ = "MIT"
-__version__ = pkg_resources.get_distribution('webrtcvad-wheels').version
+
+# Get the version from the package: in Python 3.8+ use importlib.metadata (when it was added), otherwise use pkg_resources (which doesn't work in 3.12+)
+if sys.version_info >= (3, 8):
+    try:
+        from importlib.metadata import version, PackageNotFoundError
+        __version__ = version('webrtcvad-wheels')
+    except PackageNotFoundError:
+        __version__ = "unknown"
+else:
+    import pkg_resources
+    __version__ = pkg_resources.get_distribution('webrtcvad-wheels').version
 
 
 class Vad(object):
