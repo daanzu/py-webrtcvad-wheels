@@ -55,6 +55,7 @@
 #endif
 #define WEBRTC_ARCH_BIG_ENDIAN
 // #elif defined(__s390x__)
+// FIXME: s390x tests fail: AssertionError: '011110111111111111111111111100' != '111111111111111111111111111111'
 // #define WEBRTC_ARCH_64_BITS
 // #define WEBRTC_ARCH_BIG_ENDIAN
 #else
