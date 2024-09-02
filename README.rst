@@ -1,17 +1,25 @@
-.. image:: https://travis-ci.org/daanzu/py-webrtcvad-wheels.svg?branch=release
-    :target: https://travis-ci.org/daanzu/py-webrtcvad-wheels
 .. image:: https://img.shields.io/pypi/v/webrtcvad-wheels.svg
+    :target: https://pypi.python.org/pypi/webrtcvad-wheels/
+.. image:: https://img.shields.io/pypi/pyversions/webrtcvad-wheels.svg
     :target: https://pypi.python.org/pypi/webrtcvad-wheels/
 .. image:: https://img.shields.io/pypi/wheel/webrtcvad-wheels.svg
     :target: https://pypi.python.org/pypi/webrtcvad-wheels/
+.. image:: https://img.shields.io/pypi/dm/webrtcvad-wheels.svg?logo=python
+    :target: https://pypi.python.org/pypi/webrtcvad-wheels/
+.. image:: https://github.com/daanzu/py-webrtcvad-wheels/actions/workflows/build.yml/badge.svg
+    :target: https://github.com/daanzu/py-webrtcvad-wheels/actions/workflows/build.yml
+.. image:: https://img.shields.io/badge/donate-PayPal-green.svg
+    :target: https://paypal.me/daanzu
+.. image:: https://img.shields.io/badge/donate-GitHub-pink.svg
+    :target: https://github.com/sponsors/daanzu
 
 py-webrtcvad-wheels
 ===================
 
-This is a python interface to the WebRTC Voice Activity Detector (VAD). 
-It is compatible with Python 2 and Python 3.  It is forked from
+This is a python interface to the WebRTC Voice Activity Detector (VAD).
+It is forked from
 `wiseman/py-webrtcvad <https://github.com/wiseman/py-webrtcvad>`_ to
-provide releases with binary wheels.
+provide updated releases with binary wheels.
 
 A `VAD <https://en.wikipedia.org/wiki/Voice_activity_detection>`_
 classifies a piece of audio data as being voiced or unvoiced. It can
@@ -26,7 +34,7 @@ How to use it
 
 0. Install the webrtcvad module::
 
-    pip install webrtcvad
+    pip install webrtcvad-wheels
 
 1. Create a ``Vad`` object::
 
@@ -52,7 +60,7 @@ How to use it
 
 
 See `example.py
-<https://github.com/wiseman/py-webrtcvad/blob/master/example.py>`_ for
+<https://github.com/daanzu/py-webrtcvad-wheels/blob/master/example.py>`_ for
 a more detailed example that will process a .wav file, find the voiced
 segments, and write each one as a separate .wav.
 
@@ -69,16 +77,38 @@ To run unit tests::
 History
 -------
 
+2.0.11.post1
+
+* Force build of new wheels.
+
+2.0.11
+
+* Fix out-of-bounds memory read in WebRtcVad_FindMinimum.
+* Add Python 3.10 & 3.11 builds.
+* Add PPC support & builds.
+* Implement CI/CD with GitHub Actions instead.
+
+2.0.10.post2
+
+* Revert updating to the latest webrtcvad upstream version, as it breaks build.
+* Tweak CI/CD configuration.
+* Add Python 3.9 build.
+
+2.0.10.post1
+
+* Merge various changes from upstream.
+* Implement CI/CD with Travis CI.
+
+FORK
+
 2.0.10
 
-    Fixed memory leak. Thank you, `bond005
-    <https://github.com/bond005>`_!
+* Fixed memory leak. Thank you, `bond005 <https://github.com/bond005>`_!
 
 2.0.9
 
-    Improved example code. Added WebRTC license.
+* Improved example code. Added WebRTC license.
 
 2.0.8
 
-    Fixed Windows compilation errors. Thank you, `xiongyihui
-    <https://github.com/xiongyihui>`_!
+* Fixed Windows compilation errors. Thank you, `xiongyihui <https://github.com/xiongyihui>`_!
