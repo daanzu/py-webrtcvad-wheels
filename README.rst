@@ -77,6 +77,11 @@ To run unit tests::
 History
 -------
 
+2.0.12
+
+* Add Python 3.12 & 3.13 builds.
+* Fix `pkg_resources` usage for Python 3.12+.
+
 2.0.11.post1
 
 * Force build of new wheels.
