@@ -96,7 +96,7 @@ class WebRtcVadTests(unittest.TestCase):
             start_memory * threshold_ratio)
 
     @unittest.skipIf(platform.python_implementation() == 'PyPy', "fails on pypy, possibly due to inaccuracy in memory tracking?")
-    def test_leak(self):
+    def test_leak_linear_usage(self):
         file_name = os.path.join(os.path.dirname(__file__), 'leak-test.wav')
         sound, fs = self._load_wave(file_name)
         frame_ms = 0.010
@@ -113,6 +113,14 @@ class WebRtcVadTests(unittest.TestCase):
                     if vad.is_speech(sound[slice_start:slice_end], fs):
                         find_voice = True
                 self.assertTrue(find_voice)
+
+    @unittest.expectedFailure
+    def test_leak_constructor(self):
+        nrepeats = 100000
+        with self._profile_memory(0.1):
+            for _ in range(nrepeats):
+                vad = webrtcvad.Vad(3)
+                del vad
 
 
 if __name__ == '__main__':
