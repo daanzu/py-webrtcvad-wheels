@@ -1,18 +1,9 @@
+from contextlib import contextmanager
 import os
-import unittest
 import wave
 
-# try:
-#     from memory_profiler import memory_usage
-# except ImportError:
-#     import sys
-#     import pkg_resources
-#     version_info = sys.version_info
-#     if version_info.major == 3 and version_info.minor >= 11 and pkg_resources.get_distribution('memory_profiler').version == '0.60.0':
-#         # Bypass bug in memory_profiler 0.60.0 on Python 3.11+
-#         memory_usage = None
-#     else:
-#         raise
+import psutil
+import unittest
 
 import webrtcvad
 
@@ -93,29 +84,33 @@ class WebRtcVadTests(unittest.TestCase):
                 result += '1' if voiced else '0'
             self.assertEqual(expecteds[mode], result)
 
-    # def test_leak(self):
-    #     if memory_usage is None:
-    #         return
-    #     file_name = os.path.join(os.path.dirname(__file__), 'leak-test.wav')
-    #     sound, fs = self._load_wave(file_name)
-    #     frame_ms = 0.010
-    #     frame_len = int(round(fs * frame_ms))
-    #     n = int(len(sound) / (2 * frame_len))
-    #     nrepeats = 1000
-    #     vad = webrtcvad.Vad(3)
-    #     used_memory_before = memory_usage(-1)[0]
-    #     for counter in range(nrepeats):
-    #         find_voice = False
-    #         for frame_ind in range(n):
-    #             slice_start = (frame_ind * 2 * frame_len)
-    #             slice_end = ((frame_ind + 1) * 2 * frame_len)
-    #             if vad.is_speech(sound[slice_start:slice_end], fs):
-    #                 find_voice = True
-    #         self.assertTrue(find_voice)
-    #     used_memory_after = memory_usage(-1)[0]
-    #     self.assertGreaterEqual(
-    #         used_memory_before / 5.0,
-    #         used_memory_after - used_memory_before)
+    @contextmanager
+    def _profile_memory(self, threshold_ratio):
+        process = psutil.Process()
+        start_memory = process.memory_info().rss
+        yield
+        end_memory = process.memory_info().rss
+        self.assertLessEqual(
+            end_memory - start_memory,
+            start_memory * threshold_ratio)
+
+    def test_leak(self):
+        file_name = os.path.join(os.path.dirname(__file__), 'leak-test.wav')
+        sound, fs = self._load_wave(file_name)
+        frame_ms = 0.010
+        frame_len = int(round(fs * frame_ms))
+        n = int(len(sound) / (2 * frame_len))
+        nrepeats = 1000
+        vad = webrtcvad.Vad(3)
+        with self._profile_memory(0.2):
+            for _ in range(nrepeats):
+                find_voice = False
+                for frame_ind in range(n):
+                    slice_start = (frame_ind * 2 * frame_len)
+                    slice_end = ((frame_ind + 1) * 2 * frame_len)
+                    if vad.is_speech(sound[slice_start:slice_end], fs):
+                        find_voice = True
+                self.assertTrue(find_voice)
 
 
 if __name__ == '__main__':

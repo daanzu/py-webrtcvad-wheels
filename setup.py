@@ -85,9 +85,6 @@ setup(
     extras_require={
         'dev': [
             'unittest2',
-            # 'check-manifest',
-            # 'zest.releaser',
-            # 'psutil',
-            # 'memory_profiler',
+            'psutil',
         ]
     })
