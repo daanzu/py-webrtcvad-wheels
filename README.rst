@@ -77,6 +77,11 @@ To run unit tests::
 History
 -------
 
+2.0.13
+
+* Add tests for memory leaks.
+* Fix memory leak in constructing `Vad` objects.
+
 2.0.12
 
 * Add Python 3.12 & 3.13 builds.

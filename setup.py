@@ -42,7 +42,7 @@ setup(
     name='webrtcvad-wheels',
     author='David Zurow',
     author_email='daanzu@gmail.com',
-    version='2.0.12',
+    version='2.0.13',
     description=('Python interface to the Google WebRTC Voice '
                  'Activity Detector (VAD) [released with binary wheels!]'),
     long_description=long_description,
@@ -53,7 +53,7 @@ setup(
         #   3 - Alpha
         #   4 - Beta
         #   5 - Production/Stable
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
 
         # Indicate who your project is intended for
         'Intended Audience :: Developers',
