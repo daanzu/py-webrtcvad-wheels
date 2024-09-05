@@ -1,17 +1,24 @@
 .. image:: https://img.shields.io/pypi/v/webrtcvad-wheels.svg
     :target: https://pypi.python.org/pypi/webrtcvad-wheels/
+    :alt: PyPI Version
 .. image:: https://img.shields.io/pypi/pyversions/webrtcvad-wheels.svg
     :target: https://pypi.python.org/pypi/webrtcvad-wheels/
+    :alt: Supported Python Versions
 .. image:: https://img.shields.io/pypi/wheel/webrtcvad-wheels.svg
     :target: https://pypi.python.org/pypi/webrtcvad-wheels/
+    :alt: Wheel Support
 .. image:: https://img.shields.io/pypi/dm/webrtcvad-wheels.svg?logo=python
     :target: https://pypi.python.org/pypi/webrtcvad-wheels/
+    :alt: Downloads per Month
 .. image:: https://github.com/daanzu/py-webrtcvad-wheels/actions/workflows/build.yml/badge.svg
     :target: https://github.com/daanzu/py-webrtcvad-wheels/actions/workflows/build.yml
+    :alt: Build Status
 .. image:: https://img.shields.io/badge/donate-PayPal-green.svg
     :target: https://paypal.me/daanzu
-.. image:: https://img.shields.io/badge/donate-GitHub-pink.svg
+    :alt: Donate via PayPal
+.. image:: https://img.shields.io/badge/sponsor-GitHub-pink.svg
     :target: https://github.com/sponsors/daanzu
+    :alt: Sponsor on GitHub
 
 py-webrtcvad-wheels
 ===================
@@ -19,7 +26,8 @@ py-webrtcvad-wheels
 This is a python interface to the WebRTC Voice Activity Detector (VAD).
 It is forked from
 `wiseman/py-webrtcvad <https://github.com/wiseman/py-webrtcvad>`_ to
-provide updated releases with binary wheels.
+provide updated releases with **binary wheels for Windows, macOS, and
+Linux**. Also includes **additional fixes and improvements**.
 
 A `VAD <https://en.wikipedia.org/wiki/Voice_activity_detection>`_
 classifies a piece of audio data as being voiced or unvoiced. It can
@@ -42,9 +50,9 @@ How to use it
     vad = webrtcvad.Vad()
 
 2. Optionally, set its aggressiveness mode, which is an integer
-   between 0 and 3. 0 is the least aggressive about filtering out
+   between 0 and 3 (inclusive). 0 is the least aggressive about filtering out
    non-speech, 3 is the most aggressive. (You can also set the mode
-   when you create the VAD, e.g. ``vad = webrtcvad.Vad(3)``)::
+   when you create the VAD, e.g. ``vad = webrtcvad.Vad(3)``; the default is ``0``)::
 
     vad.set_mode(1)
 
@@ -80,7 +88,7 @@ History
 2.0.13
 
 * Add tests for memory leaks.
-* Fix memory leak in constructing `Vad` objects.
+* Fix memory leak in constructing `Vad` objects. Thanks, `manipopopo <https://github.com/manipopopo>`_!
 
 2.0.12
 
