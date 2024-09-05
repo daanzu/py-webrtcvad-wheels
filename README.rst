@@ -88,6 +88,7 @@ History
 Unreleased
 
 * Add RISC-V support (but no wheels yet). Thanks, `hack3ric <https://github.com/hack3ric>`_!
+* Add loongarch64 support (but no wheels yet). Thanks, `zhangwenlong8911 <https://github.com/zhangwenlong8911>`_!
 
 2.0.13
 
