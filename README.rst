@@ -85,7 +85,7 @@ To run unit tests::
 History
 -------
 
-Unreleased
+2.0.14
 
 * Add RISC-V support (but no wheels yet). Thanks, `hack3ric <https://github.com/hack3ric>`_!
 * Add loongarch64 support (but no wheels yet). Thanks, `zhangwenlong8911 <https://github.com/zhangwenlong8911>`_!
