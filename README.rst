@@ -85,6 +85,10 @@ To run unit tests::
 History
 -------
 
+Unreleased
+
+* Add RISC-V support (but no wheels yet). Thanks, `hack3ric <https://github.com/hack3ric>`_!
+
 2.0.13
 
 * Add tests for memory leaks.

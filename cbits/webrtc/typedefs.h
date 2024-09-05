@@ -54,6 +54,13 @@
 #define WEBRTC_ARCH_32_BITS
 #endif
 #define WEBRTC_ARCH_BIG_ENDIAN
+#elif defined(__riscv)
+#if (__riscv_xlen == 64)
+#define WEBRTC_ARCH_64_BITS
+#else
+#define WEBRTC_ARCH_32_BITS
+#endif
+#define WEBRTC_ARCH_LITTLE_ENDIAN
 // #elif defined(__s390x__)
 // FIXME: s390x tests fail: AssertionError: '011110111111111111111111111100' != '111111111111111111111111111111'
 // #define WEBRTC_ARCH_64_BITS
