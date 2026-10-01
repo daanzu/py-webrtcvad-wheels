@@ -1,0 +1,4 @@
+# Keep this aligned with the cibuildwheel action; the validator checks it.
+cibuildwheel==3.3.1
+packaging>=24.2
+PyYAML>=6.0
