@@ -45,7 +45,7 @@ jobs:
       CIBW_TEST_EXTRAS: dev
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Set up QEMU
         if: runner.os == 'Linux'
@@ -66,7 +66,7 @@ jobs:
     name: Build and test source distribution on Python 3.14
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: actions/setup-python@v5
         with:
