@@ -85,6 +85,13 @@ To run unit tests::
 History
 -------
 
+2.0.14.post1
+
+* Packaging update; VAD behavior unchanged.
+* Require Python 3.10 or newer; support CPython 3.10-3.14 and PyPy 3.11.
+* Refresh the full wheel set for Linux, Windows, Intel macOS, and Apple Silicon macOS.
+* Include the memory-leak test fixture in the source distribution and validate distributions before publishing.
+
 2.0.14
 
 * Add RISC-V support (but no wheels yet). Thanks, `hack3ric <https://github.com/hack3ric>`_!
