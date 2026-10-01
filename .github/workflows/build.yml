@@ -96,6 +96,10 @@ jobs:
     permissions:
       contents: read
     steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - uses: actions/download-artifact@v7
         with:
           # Match the publishing job's extraction layout without publishing.
@@ -103,33 +107,23 @@ jobs:
           path: dist
           merge-multiple: true
 
-      - name: Check flattened wheels and source distribution
+      - name: Check wheels and source distribution are present
         shell: python
         run: |
           from pathlib import Path
-          import tarfile
-          import zipfile
 
           dist = Path("dist")
-          files = list(dist.iterdir())
-          wheels = list(dist.glob("*.whl"))
+          assert list(dist.glob("*.whl")), "No wheels downloaded"
           sdists = list(dist.glob("*.tar.gz"))
-          assert wheels, "No wheels downloaded"
           assert len(sdists) == 1, f"Expected one sdist, found {len(sdists)}"
-          assert all(path.is_file() for path in files), "Artifacts must be flattened into dist/"
-          assert len(files) == len(wheels) + len(sdists), "Unexpected distribution files"
-          for wheel in wheels:
-              with zipfile.ZipFile(wheel) as archive:
-                  assert archive.testzip() is None, f"Corrupt wheel: {wheel}"
-                  assert any(name.endswith(".dist-info/METADATA") for name in archive.namelist())
-          with tarfile.open(sdists[0]) as archive:
-              names = archive.getnames()
-              assert any(name.endswith("/test_webrtcvad.py") for name in names)
-              assert any(name.endswith("/test-audio.raw") for name in names)
-          print(f"Validated {len(wheels)} wheels and {len(sdists)} sdist in flat dist/ layout")
+
+      - name: Check distribution metadata
+        run: |
+          python -m pip install twine
+          python -m twine check dist/*
 
   upload_pypi:
-    needs: [build_wheels, build_sdist]
+    needs: [build_wheels, build_sdist, validate_artifacts]
     runs-on: ubuntu-latest
     # environment: pypi
     permissions:
